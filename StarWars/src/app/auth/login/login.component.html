@@ -1,0 +1,37 @@
+<p><a class="menu-link" (click)="openLogin(content)">LOG IN</a></p>
+<ng-template #content let-modal>
+  <div id="logInpForm" class="bg-star-wars">
+      <div class="modal-header text-center d-flex flex-column">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          <img class="p-2" src="./assets/img/disney-star-wars-logo.jpg" alt="">
+          <div *ngIf="needSignUp" id="needSignUp" class="border border-danger rounded-3 px-3">
+            <p class="text-danger pt-1"><small>The credentials you entered are incorrect.</small></p>
+            <p class="text-danger"><small>Reminder: passwords are case sensitive.</small></p>
+          </div>
+          <h4 class="modal-title p-2">SIGN IN</h4>
+      </div>
+      <div class="modal-body">
+      <form class="row px-3" #logInForm="ngForm">
+
+      <input class="form-control p-1 my-2 rounded-3"
+             [(ngModel)]="usuariIn.email"
+             name="email"
+             type="email" 
+             placeholder="Email Address">
+
+      <input class="form-control p-1 my-2 rounded-3"
+             [(ngModel)]="usuariIn.password"
+             name="password"
+             type="password" 
+             placeholder="Password">
+  
+      </form>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-light text-center" (click)="logIn(); result===true? modal.close(result):''">Log in</button>
+      
+      </div>
+  </div>
+
+</ng-template>
+

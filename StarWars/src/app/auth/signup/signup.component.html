@@ -1,0 +1,48 @@
+<p><a class="menu-link" (click)="openSignup(content)">SIGN UP</a></p>
+<ng-template #content let-modal>
+    <div id="signUpForm" class="bg-star-wars">
+        <div class="modal-header text-center d-flex flex-column">
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            <img class="p-2" src="./assets/img/disney-star-wars-logo.jpg" alt="">
+            <h4 class="modal-title p-2">CREATE YOUR ACCOUNT</h4>
+        </div>
+        <div class="modal-body">
+        <form (ngSubmit)="signUp()"class="row px-3" #signUpForm="ngForm">
+
+        <input class="form-control p-1 my-2 rounded-3"
+               [(ngModel)]="usuari.firstName"
+               name="firstName"
+               type="text" 
+               placeholder="First Name">     
+    
+        <input class="form-control p-1 my-2 rounded-3"
+               [(ngModel)]="usuari.lastName"
+               name="lastName"
+               type="text" 
+               placeholder="Last Name">
+ 
+        <input class="form-control p-1 my-2 rounded-3"
+               [(ngModel)]="usuari.email"
+               name="email"
+               type="email" 
+               placeholder="Email Address">
+
+        <input class="form-control p-1 my-2 rounded-3"
+               [(ngModel)]="usuari.displayName"
+               name="displayName"
+               type="text" 
+               placeholder="Display Name">
+
+        <input class="form-control p-1 my-2 rounded-3"
+               [(ngModel)]="usuari.password"
+               name="password"
+               type="password" 
+               placeholder="Password">
+    
+        </form>
+        </div>
+        <div class="modal-footer text-center">
+        <button type="submit" class="btn btn-light" (click)="modal.close('Close click'); signUp()">Create Account</button>
+        </div>
+    </div>
+  </ng-template>

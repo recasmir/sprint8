@@ -1,0 +1,32 @@
+<div class="container-fluid mt-3 pb-3">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div *ngFor="let ship of starships; let i=index" 
+                class="text-light border rounded-3 my-2 ps-5" 
+                id="shipList"
+                (click)="mostrarNau(i)" 
+                >
+                <p>Name: {{ship.name}}</p>  
+                <p>Model: {{ship.model}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-2">
+        <div class="col-2 text-end">
+            <button class="btn btn-outline-light" 
+                    (click)="prevPage()"
+                    [disabled]="page===1"
+                    >
+                    Anteriors
+            </button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-outline-light" 
+                    (click)="nextPage()" 
+                    [disabled]="page===4"
+                    >
+                    Següents
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+.stars {
+    background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 0;
+    opacity:0.9
+   }
+
+   body{
+       font-family: Helvetica;
+       color:#ced4da;
+   }
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+.menu-link{
+    color: #ced4da!important;
+    text-decoration: none;
+}
+
+.menu-link:hover{
+    color: white!important;
+    cursor: pointer;
+}
+
+.bg-star-wars{
+    background-color: #181818;
+}
+
+.dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+  }
+  .dark-modal .close {
+    color: white;
+  }
+  .light-blue-backdrop {
+    background-color: #5cb3fd;
+  }
+  .modal-title{
+      color: #ebd800;
+  }
+  .modal-header{
+      border-bottom: none!important;
+  }
+  .modal-footer{
+      border-top:none!important;
+  }
+  input{
+      margin-top: 15px;
+      margin-bottom: 15px;
+  }

@@ -1,0 +1,31 @@
+<div class="container-fluid row mt-3 pb-3">
+<div class="col">
+    <div  class="row justify-content-center">
+        <div class="col-12 text-center" id="fotoShip">
+            <img class="border-bottom-pink" src={{foto}} onerror="this.src='/assets/img/big-placeholder.jpg'" alt="">
+        </div>
+    </div> 
+    <div class="row justify-content-center text-color">   
+        <div class="col-lg-8 offset-lg-4 my-2" id="nomShip">
+            <h2>{{mostrarNau.name}}</h2>
+        </div>
+        <div class="col-lg-4 offset-lg-4">
+            <p>Model: {{mostrarNau.model}}</p>
+            <p>Cost in credits: {{mostrarNau.cost_in_credits}}</p>
+            <p>Max atmosphering speed: {{mostrarNau.max_atmosphering_speed}}</p>
+            <p>Passengers: {{mostrarNau.passengers}}</p>
+            <p>Consumables: {{mostrarNau.consumables}}</p>
+            <p>MGLT: {{mostrarNau.MGLT}}</p>
+        </div>
+        <div class="col-lg-4">
+            <p>Manufacturer: {{mostrarNau.manufacturer}}</p>
+            <p>Length: {{mostrarNau.length}}</p>
+            <p>Crew: {{mostrarNau.crew}}</p>
+            <p>Cargo capacity: {{mostrarNau.cargo_capacity}}</p>
+            <p>Hyperdrive rating: {{mostrarNau.hyperdrive_rating}}</p>
+            <p>Starship class: {{mostrarNau.starship_class}}</p>
+        </div>
+    </div>
+</div>
+</div>
+
