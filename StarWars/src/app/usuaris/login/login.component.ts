@@ -4,6 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgForm } from '@angular/forms';
 import { Usuari } from 'src/app/interfaces/usuari';
+import { of } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { AuthGuard } from '../auth.guard';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +30,9 @@ export class LoginComponent implements OnInit {
   result:boolean=true;
 
   constructor(private modalService: NgbModal,
-              private router:Router) {
+              private router:Router,
+              private authService: AuthService,
+              private authGuard: AuthGuard) {
 
     this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
    }
@@ -40,33 +45,15 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(){
-
+  
     this.usuariIn={
       email:this.usuariIn.email,
       password:this.usuariIn.password
     }
-
-    console.log(this.usuariIn);
-
-    for( let user of this.signedUpUsers){
-      if(this.usuariIn.email===user.email && this.usuariIn.password===user.password){
-        this.router.navigate(['starships']);
-        console.log(`user name: ${user.email}, user password: ${user.password}`);
-        break;
-      }else{
-        this.needSignUp=true;
-        this.result=false;
-        console.log('you need to sign up');
-        }
-      }
-      console.log(this.result);
-
-      // this.usuariIn={
-      //   email:'',
-      //   password:''
-      // }
-    }
+    this.authService.verificacioLogIn(this.usuariIn.email, this.usuariIn.password)
+    this.router.navigate(['./starships'])
     
+  }
     
   }
 

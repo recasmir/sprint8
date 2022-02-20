@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiCallsService {
 
-  private api='https://swapi.dev/api/'
+  private api='https://swapi.dev/api'
 
   public starships:Starship[]=[];
 
