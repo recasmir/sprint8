@@ -5,3 +5,8 @@ export interface Usuari{
     displayName:string;
     password:string;
 }
+
+export interface loggedUsers{
+    email:string,
+    password:string
+  }

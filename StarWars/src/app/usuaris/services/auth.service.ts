@@ -1,41 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Usuari } from 'src/app/interfaces/usuari';
+import { loggedUsers, Usuari } from 'src/app/interfaces/usuari';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  
-  usuariIn={
-    email:'',
-    password:''
-  }
-
   signedUpUsers:Usuari[];
 
-  needSignUp:boolean=false;
-  result:boolean=true;
+  loggedInUsers:loggedUsers[];
+
+  needSignUpServ:boolean=false;
+  resultServ:boolean=true;
+
   constructor(private router:Router) {
 
     this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
-   }
+   
+   this.loggedInUsers=JSON.parse(localStorage.getItem('Logged in users')!) || [];
+  }
 
   
   auth_open:boolean=false;
   
-
-  verificacioLogIn(email:string, password:string): Observable<boolean> | boolean{
   
+  verificacioLogIn(email:string, password:string): boolean{
+
+    let nouUsuariIn={
+      email,
+      password
+    }
+
     for( let user of this.signedUpUsers){
 
-      console.log('entro al for')
-      console.log('em' , email, 'pass', password)
-      console.log('email user', user.email, 'pass user', user.password)
       if(email===user.email && password===user.password){
-        console.log(`3- user name: ${user.email}, user password: ${user.password}`);
+
+        this.loggedInUsers.push({...nouUsuariIn});
+
+        localStorage.setItem('Logged in users', JSON.stringify(this.loggedInUsers));
+
+        this.resultServ=true;
         
         this.auth_open = true;
         console.log('SERV auth_open', this.auth_open)
@@ -43,15 +49,26 @@ export class AuthService {
         return true
       }else{
 
-        this.needSignUp=true;
-        this.result=false;
-        console.log('4- you need to sign up');
+        this.needSignUpServ=true;
+        this.resultServ=false;
         this.auth_open = false;
-        console.log('SERV auth_open', this.auth_open)
-        
+        this.router.navigate(['./starships'])
         }
       }
+      
       return false
+  }
+
+  estaAuth(): boolean{
+
+    for(let signedUser of this.signedUpUsers){
+      for(let loggedUser of this.loggedInUsers){
+        if(signedUser.email===loggedUser.email && signedUser.password===loggedUser.password){
+          return true
+        }
+      }
+    }
+    return false
   }
 
 }

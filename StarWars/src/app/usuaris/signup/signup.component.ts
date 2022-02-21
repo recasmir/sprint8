@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 
 import { Usuari } from './../../interfaces/usuari';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +28,9 @@ export class SignupComponent implements OnInit {
 
   signedUpUsers:Usuari[]=[];
 
-  constructor(private modalService: NgbModal) { 
+  constructor(private modalService: NgbModal,
+              private router: Router,
+              private authService: AuthService) { 
 
     this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
 
@@ -52,6 +56,10 @@ export class SignupComponent implements OnInit {
     this.signedUpUsers.push({...nouUsuari});
 
     localStorage.setItem('Signed up users', JSON.stringify(this.signedUpUsers));
+
+    this.authService.auth_open=true;
+    
+    this.router.navigate(['./starships']);
 
     console.log(this.signedUpUsers);
 
