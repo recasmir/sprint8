@@ -10,26 +10,7 @@ import { Router } from '@angular/router';
 })
 export class StarshipsComponent implements OnInit {
 
-  nau:Starship = {
-    name:                   '',
-    model:                  '',
-    manufacturer:           '',
-    cost_in_credits:        '',
-    length:                 '',
-    max_atmosphering_speed: '',
-    crew:                   '',
-    passengers:             '',
-    cargo_capacity:         '',
-    consumables:            '',
-    hyperdrive_rating:      '',
-    MGLT:                   '',
-    starship_class:         '',
-    pilots:                 [],
-    films:                  [],
-    created:                new Date,
-    edited:                 new Date,
-    url:                    ''
-}
+  nau!:Starship;
 
   constructor(private shipService:ApiCallsService, 
               private router: Router) { }
@@ -37,7 +18,6 @@ export class StarshipsComponent implements OnInit {
   page:number=1;
 
   ngOnInit(): void {
-    
     this.shipService.getStarships(this.page);
   }
 

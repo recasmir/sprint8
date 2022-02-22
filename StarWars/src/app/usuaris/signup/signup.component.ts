@@ -1,18 +1,28 @@
 
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Usuari } from './../../interfaces/usuari';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { SimpleModalComponent } from 'ngx-simple-modal';
 
+import { Usuari } from './../../interfaces/usuari';
+import { AuthService } from '../services/auth.service';
+import { ModalsService } from '../services/modals.service';
+
+export interface AlertModel {
+  title?: string;
+  message: string;
+}
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+
+export class SignupComponent extends SimpleModalComponent<AlertModel, null> implements AlertModel {
+
+  title: string = '';
+  message: string = '';
 
   signUpForm:FormGroup = this.fb.group({
     firstName:['', Validators.required],
@@ -22,18 +32,7 @@ export class SignupComponent {
   })
 
   signedUpUsers:Usuari[]=[];
-  result:boolean=true;
-
-  constructor(private modalService: NgbModal,
-              private fb: FormBuilder,
-              private router: Router,
-              private authService: AuthService){
-
-    this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
-  }
-
-  // closeResult: string='';
-
+  canClose:boolean=true;
   usuari:Usuari={
     firstName:'',
     lastName:'',
@@ -41,19 +40,27 @@ export class SignupComponent {
     password:''
   }
 
-  openSignup(content:any) {
-    this.modalService.open(content, { centered: true });
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService,
+              private modalsService:ModalsService){
+    super();
+    this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
+  }
+
+  openLogInModal(){
+    this.modalsService.openLogInModal();
   }
 
   signUp(){
 
     if(this.signUpForm.invalid){
       this.signUpForm.markAllAsTouched();
-      this.result=false;
+      this.canClose=false;
       return
     }
 
-    this.result=true;
+    this.canClose=true;
 
     this.usuari={
       firstName:this.signUpForm.controls['firstName'].value,
@@ -71,11 +78,11 @@ export class SignupComponent {
     this.router.navigate(['./starships']);
 
     this.signUpForm.reset();
-    
    }
 
   validField(inputField:string){
     return this.signUpForm.controls[inputField].errors && this.signUpForm.controls[inputField].touched;
   }
+  
 }
 

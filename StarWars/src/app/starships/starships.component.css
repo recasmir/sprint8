@@ -6,3 +6,9 @@
 p{
     margin-top: 16px;
 }
+.pointer{
+    cursor: pointer;
+}
+#shipList:hover{
+    opacity: 1;
+}

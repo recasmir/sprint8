@@ -11,11 +11,7 @@ export class ApiCallsService {
 
   public starships:Starship[]=[];
 
-  // page:number=1;
-
   constructor(private http:HttpClient) { }
-
-  
 
   getStarships(page:number=1){
     const path=`${this.api}/starships`;
@@ -32,8 +28,5 @@ export class ApiCallsService {
 
   getSingleStarship(id:number){
     this.http.get<SearchStarshipsResponse>(`${this.api}/starships/${id}`)
-    // .subscribe((resp)=>{
-    //   this.starships=resp.results;
-    // })
   }
 }

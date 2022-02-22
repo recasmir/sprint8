@@ -1,39 +1,48 @@
-<p><a class="menu-link" (click)="openLogin(content)">LOG IN</a></p>
-<ng-template #content let-modal>
-  <div id="logInpForm" class="bg-star-wars">
-      <div class="modal-header text-center d-flex flex-column">
-          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div id="logInForm" class="bg-star-wars">
+        <div class="modal-header text-center d-flex flex-column">
+
+          <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+            
           <img class="p-2" src="./assets/img/disney-star-wars-logo.jpg" alt="">
-          <div *ngIf="needSignUp" id="needSignUp" class="border border-danger rounded-3 px-3">
-            <p class="text-danger pt-1"><small>The credentials you entered are incorrect.</small></p>
-            <p class="text-danger"><small>Reminder: passwords are case sensitive.</small></p>
-          </div>
-          <h4 class="modal-title p-2">SIGN IN</h4>
-      </div>
-      <div class="modal-body">
-      <form class="row px-3" #logInForm="ngForm">
+            <div *ngIf="needSignUp" id="needSignUp" class="border border-danger rounded-3 px-3">
+              <p class="text-danger pt-1"><small>The credentials you entered are incorrect.</small></p>
+              <p class="text-danger"><small>Reminder: passwords are case sensitive.</small></p>
+            </div>
+            <h2 class="modal-title pt-2 pb-0">LOG IN</h2>
+        </div>
+        <div class="modal-body pt-0">
+        <form class="row px-3" [formGroup]="logInForm">
 
-      <input class="form-control p-1 my-2 rounded-3"
-             [(ngModel)]="usuariIn.email"
-             name="email"
-             type="email" 
-             placeholder="Email Address">
+        <input class="form-control p-1 my-2 rounded-3"
+              formControlName="email"
+              type="email" 
+              placeholder="Email Address">
+        <span class="text-danger"
+              *ngIf="validField('email')">
+              Email is required.
+        </span>
 
-      <input class="form-control p-1 my-2 rounded-3"
-             [(ngModel)]="usuariIn.password"
-             name="password"
-             type="password" 
-             placeholder="Password">
-  
-      </form>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-light text-center" (click)="logIn(); result===true? modal.close(result):''">Log in</button>
+        <input class="form-control p-1 my-2 rounded-3"
+              formControlName="password"
+              type="password" 
+              placeholder="Password">
+        <span class="text-danger"
+              *ngIf="validField('password')">
+              Email is required.
+        </span>
 
-      <!-- <button type="button" class="btn btn-light text-center" (click)="logIn();modal.close('Close click')">Log in</button> -->
-      
+        </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center pb-4">
+        <button type="button" class="btn btn-light text-center" (click)="logIn(); canClose===true? close():''">Log in</button>
+        <button type="button" (click)="openSignUpModal(); close()" class="btn btn-outline-warning">Create an account</button>
+        </div>
       </div>
+      <div>
+        
+      </div>
+    </div>
   </div>
-
-</ng-template>
 

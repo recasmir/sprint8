@@ -1,12 +1,13 @@
-<p><a class="menu-link" (click)="openSignup(content)">SIGN UP</a></p>
-<ng-template #content let-modal>
+
+<div class="modal-dialog">
+<div class="modal-content">
     <div id="signUpForm" class="bg-star-wars">
-        <div class="modal-header text-center d-flex flex-column">
-            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <div class="modal-header text-center d-flex flex-column pb-0">
+            <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
             <img class="p-2" src="./assets/img/disney-star-wars-logo.jpg" alt="">
-            <h4 class="modal-title p-2">CREATE YOUR ACCOUNT</h4>
+            <h2 class="modal-title pt-2 pb-0">CREATE YOUR ACCOUNT</h2>
         </div>
-        <div class="modal-body">
+        <div class="modal-body pt-0">
 
        <form (ngSubmit)="signUp()"class="row px-3" [formGroup]="signUpForm">
 
@@ -53,13 +54,15 @@
     
         </form>
         </div>
-        <div class="modal-footer text-center">
+        <div class="modal-footer d-flex justify-content-center">
         <button type="submit" 
                 class="btn btn-light" 
-                (click)="signUp(); result===true? modal.close(result):''"
+                (click)="signUp(); canClose===true? close():''"
                 >Create Account</button>
+                <p class="col-12 text-center py-3">Already have an account? <span><a (click)="openLogInModal(); close()">Log in</a></span> </p>
                 
         </div>
     </div>
-  </ng-template>
+</div>
+</div>
 

@@ -1,15 +1,15 @@
-<div class="container-fluid row mt-3 pb-3">
-<div class="col">
+<div class="container-fluid row mt-3 pb-3 justify-content-center">
+<div class="col-8">
     <div  class="row justify-content-center">
         <div class="col-12 text-center" id="fotoShip">
             <img class="border-bottom-pink" src={{foto}} onerror="this.src='/assets/img/big-placeholder.jpg'" alt="">
         </div>
     </div> 
     <div class="row justify-content-center text-color">   
-        <div class="col-lg-8 offset-lg-4 my-2" id="nomShip">
+        <div class="col-lg-8  offset-lg-2 my-2" id="nomShip">
             <h2>{{mostrarNau.name}}</h2>
         </div>
-        <div class="col-lg-4 offset-lg-4">
+        <div class="col-lg-3 offset-lg-1">
             <p>Model: {{mostrarNau.model}}</p>
             <p>Cost in credits: {{mostrarNau.cost_in_credits}}</p>
             <p>Max atmosphering speed: {{mostrarNau.max_atmosphering_speed}}</p>

@@ -4,10 +4,9 @@
             <img src="./assets/img/star-wars.png" alt="Star Wars logo" href="#">
         </div>
         <div class="col-12 text-end text-light d-flex justify-content-end">
-          
-          <app-login></app-login>
+          <p><a class="menu-link" (click)="closeModal(); openLogInModal()">LOG IN</a></p>
           <p class="px-2">//</p>
-          <app-signup></app-signup>
+          <p><a class="menu-link" (click)="closeModal(); openSignUpModal()">SIGN UP</a></p>
         
         </div>
         <div class="col-12">
@@ -16,14 +15,12 @@
                   <a class="nav-link menu-link" href="#">HOME</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link menu-link" href="/starships">STARSHIPS</a>
+                  <a class="nav-link menu-link" (click)="goToStarships()">STARSHIPS</a>
                 </li>
               </ul>
         </div>
     </div>
-
-
-
 </div>
+
 
 

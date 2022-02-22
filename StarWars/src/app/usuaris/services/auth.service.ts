@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { loggedUsers, Usuari } from 'src/app/interfaces/usuari';
 
@@ -9,28 +10,29 @@ import { loggedUsers, Usuari } from 'src/app/interfaces/usuari';
 export class AuthService {
   
   signedUpUsers:Usuari[];
-
   loggedInUsers:loggedUsers[];
-
   needSignUpServ:boolean=false;
   resultServ:boolean=true;
+  auth_open:boolean=false;
 
-  constructor(private router:Router) {
+  constructor(private router:Router,
+              private modalService: NgbModal) {
 
     this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
    
    this.loggedInUsers=JSON.parse(localStorage.getItem('Logged in users')!) || [];
   }
 
-  
-  auth_open:boolean=false;
-  
-  
   verificacioLogIn(email:string, password:string): boolean{
 
     let nouUsuariIn={
       email,
       password
+    }
+
+    if(this.signedUpUsers.length===0){
+      this.needSignUpServ=true;
+      this.resultServ=false;
     }
 
     for( let user of this.signedUpUsers){
@@ -48,14 +50,12 @@ export class AuthService {
            
         return true
       }else{
-
         this.needSignUpServ=true;
         this.resultServ=false;
         this.auth_open = false;
         this.router.navigate(['./starships'])
         }
       }
-      
       return false
   }
 

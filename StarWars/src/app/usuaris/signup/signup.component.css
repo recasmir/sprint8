@@ -1,0 +1,13 @@
+p{
+    color: #ced4da;
+}
+
+a{
+    color:#ebd800!important;
+    cursor: pointer;
+}
+button{
+    background-color: #484848;
+    border-color:#484848;
+    color:#ced4da;
+}
