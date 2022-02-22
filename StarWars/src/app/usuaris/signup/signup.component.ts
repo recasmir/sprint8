@@ -1,7 +1,7 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Usuari } from './../../interfaces/usuari';
 import { Router } from '@angular/router';
@@ -12,31 +12,33 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
-  closeResult: string='';
+  signUpForm:FormGroup = this.fb.group({
+    firstName:['', Validators.required],
+    lastName:['', Validators.required],
+    email:['', Validators.required],
+    password:['', Validators.required],
+  })
 
-  @ViewChild('signUpForm') signUpForm!: NgForm;
+  signedUpUsers:Usuari[]=[];
+  result:boolean=true;
+
+  constructor(private modalService: NgbModal,
+              private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService){
+
+    this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
+  }
+
+  // closeResult: string='';
 
   usuari:Usuari={
     firstName:'',
     lastName:'',
     email:'',
-    displayName:'',
     password:''
-  }
-
-  signedUpUsers:Usuari[]=[];
-
-  constructor(private modalService: NgbModal,
-              private router: Router,
-              private authService: AuthService) { 
-
-    this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
-
-  }
-
-  ngOnInit(): void {
   }
 
   openSignup(content:any) {
@@ -45,15 +47,22 @@ export class SignupComponent implements OnInit {
 
   signUp(){
 
-    const nouUsuari:Usuari={
-      firstName:this.usuari.firstName,
-      lastName:this.usuari.lastName,
-      email:this.usuari.email,
-      displayName:this.usuari.displayName,
-      password:this.usuari.password
+    if(this.signUpForm.invalid){
+      this.signUpForm.markAllAsTouched();
+      this.result=false;
+      return
     }
 
-    this.signedUpUsers.push({...nouUsuari});
+    this.result=true;
+
+    this.usuari={
+      firstName:this.signUpForm.controls['firstName'].value,
+      lastName:this.signUpForm.controls['lastName'].value,
+      email:this.signUpForm.controls['email'].value,
+      password:this.signUpForm.controls['password'].value
+    }
+
+    this.signedUpUsers.push({...this.usuari});
 
     localStorage.setItem('Signed up users', JSON.stringify(this.signedUpUsers));
 
@@ -61,17 +70,12 @@ export class SignupComponent implements OnInit {
     
     this.router.navigate(['./starships']);
 
-    console.log(this.signedUpUsers);
-
-    this.usuari = {
-      firstName:'',
-      lastName:'',
-      email:'',
-      displayName:'',
-      password:''
-    };
+    this.signUpForm.reset();
     
+   }
+
+  validField(inputField:string){
+    return this.signUpForm.controls[inputField].errors && this.signUpForm.controls[inputField].touched;
   }
-
-
 }
+
