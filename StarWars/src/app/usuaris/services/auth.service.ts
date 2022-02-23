@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, of } from 'rxjs';
+
 import { loggedUsers, Usuari } from 'src/app/interfaces/usuari';
 
 @Injectable({
@@ -15,8 +14,7 @@ export class AuthService {
   resultServ:boolean=true;
   auth_open:boolean=false;
 
-  constructor(private router:Router,
-              private modalService: NgbModal) {
+  constructor(private router:Router) {
 
     this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
    
@@ -61,16 +59,17 @@ export class AuthService {
       return false
   }
 
-  estaAuth(): boolean{
+  //function to allow seeing the Starships page when the user is also logged in, besides being registered. Not need it now but left as reference.
+  // estaAuth(): boolean{
 
-    for(let signedUser of this.signedUpUsers){
-      for(let loggedUser of this.loggedInUsers){
-        if(signedUser.email===loggedUser.email && signedUser.password===loggedUser.password){
-          return true
-        }
-      }
-    }
-    return false
-  }
+  //   for(let signedUser of this.signedUpUsers){
+  //     for(let loggedUser of this.loggedInUsers){
+  //       if(signedUser.email===loggedUser.email && signedUser.password===loggedUser.password){
+  //         return true
+  //       }
+  //     }
+  //   }
+  //   return false
+  // }
 
 }
