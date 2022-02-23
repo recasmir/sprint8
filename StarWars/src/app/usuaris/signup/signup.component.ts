@@ -27,8 +27,8 @@ export class SignupComponent extends SimpleModalComponent<AlertModel, null> impl
   signUpForm:FormGroup = this.fb.group({
     firstName:['', Validators.required],
     lastName:['', Validators.required],
-    email:['', Validators.required],
-    password:['', Validators.required],
+    email:['', [Validators.required, Validators.email]],
+    password:['', [Validators.required, Validators.minLength(6)]],
   })
 
   signedUpUsers:Usuari[]=[];

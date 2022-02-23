@@ -42,8 +42,8 @@ export class LoginComponent extends SimpleModalComponent<AlertModel, null> imple
   }
 
   logInForm:FormGroup= this.fb.group({
-    email:['', Validators.required],
-    password:['', Validators.required]
+    email:['', [Validators.required, Validators.email]],
+    password:['', [Validators.required, Validators.minLength(6)]]
   })
 
   usuariIn: loggedUsers={
@@ -55,7 +55,7 @@ export class LoginComponent extends SimpleModalComponent<AlertModel, null> imple
   canClose:boolean=true;
 
   logIn(){
-
+console.log('enter in login function')
     if(this.logInForm.invalid){
       this.logInForm.markAllAsTouched();
       this.canClose=false;

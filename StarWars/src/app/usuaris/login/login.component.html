@@ -21,7 +21,7 @@
               placeholder="Email Address">
         <span class="text-danger"
               *ngIf="validField('email')">
-              Email is required.
+              Email is required. Please, make sure your email address is correct.
         </span>
 
         <input class="form-control p-1 my-2 rounded-3"
@@ -30,7 +30,7 @@
               placeholder="Password">
         <span class="text-danger"
               *ngIf="validField('password')">
-              Email is required.
+              Password is required and needs at least 6 characters.
         </span>
 
         </form>

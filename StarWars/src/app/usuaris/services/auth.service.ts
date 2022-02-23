@@ -30,6 +30,8 @@ export class AuthService {
       password
     }
 
+    this.signedUpUsers=JSON.parse(localStorage.getItem('Signed up users')!) || [];
+
     if(this.signedUpUsers.length===0){
       this.needSignUpServ=true;
       this.resultServ=false;
